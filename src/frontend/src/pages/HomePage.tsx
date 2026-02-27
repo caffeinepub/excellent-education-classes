@@ -97,6 +97,15 @@ export default function HomePage({ navigate }: HomePageProps) {
         ))}
 
         <div className="relative z-10 max-w-6xl mx-auto px-4 sm:px-6 py-20 text-center">
+          {/* Logo */}
+          <div className="flex justify-center mb-6">
+            <img
+              src="/assets/logo.png"
+              alt="Excellent Education Classes Logo"
+              className="h-28 sm:h-36 w-auto object-contain drop-shadow-2xl animate-[fadeInUp_0.7s_ease_forwards]"
+            />
+          </div>
+
           {/* Festive badge */}
           <div className="inline-flex items-center gap-2 bg-white/20 backdrop-blur-sm rounded-full px-4 py-2 mb-6">
             <span className="text-lg">🎨</span>

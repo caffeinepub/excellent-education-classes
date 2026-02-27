@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Menu, X, GraduationCap } from "lucide-react";
+import { Menu, X } from "lucide-react";
 
 type Page = "/" | "/register" | "/courses" | "/about";
 
@@ -31,12 +31,14 @@ export default function Navbar({ currentPage, navigate }: NavbarProps) {
           <button
             type="button"
             onClick={() => handleNav("/")}
-            className="flex items-center gap-2 group"
+            className="flex items-center gap-3 group"
           >
-            <div className="w-9 h-9 rounded-full bg-white/20 flex items-center justify-center group-hover:bg-white/30 transition-colors">
-              <GraduationCap className="w-5 h-5 text-white" />
-            </div>
-            <div className="flex flex-col leading-none">
+            <img
+              src="/assets/logo.png"
+              alt="Excellent Education Classes Logo"
+              className="h-12 w-auto object-contain drop-shadow-md group-hover:scale-105 transition-transform duration-200"
+            />
+            <div className="hidden sm:flex flex-col leading-none">
               <span className="font-display font-extrabold text-white text-base leading-tight">
                 Excellent Education
               </span>
