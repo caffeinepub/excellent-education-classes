@@ -1,0 +1,222 @@
+@import url('https://fonts.googleapis.com/css2?family=Baloo+2:wght@400;500;600;700;800&family=Nunito:wght@300;400;500;600;700;800&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --radius: 0.875rem;
+
+    /* Holi Festival Palette */
+    --background: 0.98 0.005 85;
+    --foreground: 0.18 0.04 20;
+    --card: 1 0 0;
+    --card-foreground: 0.18 0.04 20;
+    --popover: 1 0 0;
+    --popover-foreground: 0.18 0.04 20;
+
+    /* Magenta/Pink as primary */
+    --primary: 0.58 0.24 340;
+    --primary-foreground: 1 0 0;
+
+    /* Saffron orange as secondary */
+    --secondary: 0.72 0.18 50;
+    --secondary-foreground: 0.18 0.04 20;
+
+    --muted: 0.94 0.02 85;
+    --muted-foreground: 0.5 0.04 20;
+
+    /* Lime green accent */
+    --accent: 0.7 0.2 140;
+    --accent-foreground: 0.1 0.04 20;
+
+    --destructive: 0.577 0.245 27.325;
+    --destructive-foreground: 1 0 0;
+
+    --border: 0.88 0.03 85;
+    --input: 0.88 0.03 85;
+    --ring: 0.58 0.24 340;
+
+    /* Chart / decorative colors */
+    --chart-1: 0.58 0.24 340;
+    --chart-2: 0.72 0.18 50;
+    --chart-3: 0.7 0.2 140;
+    --chart-4: 0.55 0.22 270;
+    --chart-5: 0.65 0.22 20;
+
+    --sidebar: 0.98 0.005 85;
+    --sidebar-foreground: 0.18 0.04 20;
+    --sidebar-primary: 0.58 0.24 340;
+    --sidebar-primary-foreground: 1 0 0;
+    --sidebar-accent: 0.94 0.02 85;
+    --sidebar-accent-foreground: 0.18 0.04 20;
+    --sidebar-border: 0.88 0.03 85;
+    --sidebar-ring: 0.58 0.24 340;
+
+    /* Holi custom tokens */
+    --holi-pink: 0.58 0.24 340;
+    --holi-orange: 0.72 0.18 50;
+    --holi-yellow: 0.88 0.18 90;
+    --holi-green: 0.7 0.2 140;
+    --holi-blue: 0.55 0.22 270;
+    --holi-purple: 0.55 0.22 300;
+    --holi-cream: 0.97 0.01 85;
+  }
+
+  .dark {
+    --background: 0.145 0 0;
+    --foreground: 0.985 0 0;
+    --card: 0.205 0 0;
+    --card-foreground: 0.985 0 0;
+    --popover: 0.269 0 0;
+    --popover-foreground: 0.985 0 0;
+    --primary: 0.65 0.24 340;
+    --primary-foreground: 0.18 0 0;
+    --secondary: 0.269 0 0;
+    --secondary-foreground: 0.985 0 0;
+    --muted: 0.269 0 0;
+    --muted-foreground: 0.708 0 0;
+    --accent: 0.371 0 0;
+    --accent-foreground: 0.985 0 0;
+    --destructive: 0.704 0.191 22.216;
+    --destructive-foreground: 0.205 0 0;
+    --border: 1 0 0 / 10%;
+    --input: 1 0 0 / 15%;
+    --ring: 0.556 0 0;
+    --chart-1: 0.488 0.243 264.376;
+    --chart-2: 0.696 0.17 162.48;
+    --chart-3: 0.769 0.188 70.08;
+    --chart-4: 0.627 0.265 303.9;
+    --chart-5: 0.645 0.246 16.439;
+    --sidebar: 0.205 0 0;
+    --sidebar-foreground: 0.985 0 0;
+    --sidebar-primary: 0.488 0.243 264.376;
+    --sidebar-primary-foreground: 0.985 0 0;
+    --sidebar-accent: 0.269 0 0;
+    --sidebar-accent-foreground: 0.985 0 0;
+    --sidebar-border: 1 0 0 / 10%;
+    --sidebar-ring: 0.439 0 0;
+  }
+
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+    font-family: 'Nunito', sans-serif;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: 'Baloo 2', cursive;
+  }
+}
+
+@layer utilities {
+  .holi-gradient-hero {
+    background: linear-gradient(135deg,
+      oklch(0.58 0.24 340) 0%,
+      oklch(0.72 0.18 50) 35%,
+      oklch(0.88 0.18 90) 60%,
+      oklch(0.7 0.2 140) 100%
+    );
+  }
+
+  .holi-gradient-nav {
+    background: linear-gradient(90deg,
+      oklch(0.55 0.22 300) 0%,
+      oklch(0.58 0.24 340) 40%,
+      oklch(0.72 0.18 50) 100%
+    );
+  }
+
+  .holi-gradient-card-pink {
+    background: linear-gradient(135deg, oklch(0.95 0.06 340), oklch(0.98 0.02 340));
+  }
+
+  .holi-gradient-card-orange {
+    background: linear-gradient(135deg, oklch(0.95 0.06 50), oklch(0.98 0.02 50));
+  }
+
+  .holi-gradient-card-green {
+    background: linear-gradient(135deg, oklch(0.95 0.06 140), oklch(0.98 0.02 140));
+  }
+
+  .holi-gradient-card-blue {
+    background: linear-gradient(135deg, oklch(0.95 0.06 270), oklch(0.98 0.02 270));
+  }
+
+  .holi-gradient-card-purple {
+    background: linear-gradient(135deg, oklch(0.95 0.06 300), oklch(0.98 0.02 300));
+  }
+
+  .holi-gradient-card-yellow {
+    background: linear-gradient(135deg, oklch(0.95 0.06 90), oklch(0.98 0.02 90));
+  }
+
+  .holi-text-pink {
+    color: oklch(0.55 0.24 340);
+  }
+  .holi-text-orange {
+    color: oklch(0.62 0.18 50);
+  }
+  .holi-text-green {
+    color: oklch(0.52 0.2 140);
+  }
+  .holi-text-blue {
+    color: oklch(0.45 0.22 270);
+  }
+  .holi-text-purple {
+    color: oklch(0.48 0.22 300);
+  }
+
+  .holi-blob {
+    border-radius: 60% 40% 70% 30% / 50% 60% 40% 50%;
+    opacity: 0.15;
+    position: absolute;
+    pointer-events: none;
+  }
+
+  .page-enter {
+    animation: pageEnter 0.5s ease-out forwards;
+  }
+
+  @keyframes pageEnter {
+    from {
+      opacity: 0;
+      transform: translateY(16px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .card-hover {
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+  }
+
+  .card-hover:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 32px -8px oklch(0.58 0.24 340 / 0.25);
+  }
+
+  .splash-float {
+    animation: splashFloat 6s ease-in-out infinite;
+  }
+
+  .splash-float-2 {
+    animation: splashFloat 8s ease-in-out infinite 1s;
+  }
+
+  .splash-float-3 {
+    animation: splashFloat 7s ease-in-out infinite 2s;
+  }
+
+  @keyframes splashFloat {
+    0%, 100% { transform: translateY(0px) rotate(0deg); }
+    33% { transform: translateY(-12px) rotate(5deg); }
+    66% { transform: translateY(8px) rotate(-3deg); }
+  }
+}
