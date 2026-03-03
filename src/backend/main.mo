@@ -4,6 +4,8 @@ import Time "mo:core/Time";
 import Runtime "mo:core/Runtime";
 import List "mo:core/List";
 
+
+
 actor {
   type Student = {
     name : Text;
@@ -16,8 +18,10 @@ actor {
     id : Nat;
   };
 
-  let students = Map.empty<Nat, Student>();
+  let adminPassword = "your_password_here";
   var nextId = 1;
+
+  let students = Map.empty<Nat, Student>();
 
   public shared ({ caller }) func registerStudent(name : Text, email : Text, mobile : Text, gender : Text, school : Text, classLevel : Text) : async Nat {
     if (email.isEmpty() or mobile.isEmpty()) {
@@ -40,6 +44,13 @@ actor {
     student.id;
   };
 
+  public query ({ caller }) func getStudentById(id : Nat) : async Student {
+    switch (students.get(id)) {
+      case (null) { Runtime.trap("Student not found") };
+      case (?student) { student };
+    };
+  };
+
   public query ({ caller }) func getAllStudents() : async [Student] {
     let list = List.empty<Student>();
     for ((_, student) in students.entries()) {
@@ -48,10 +59,7 @@ actor {
     list.toArray();
   };
 
-  public query ({ caller }) func getStudentById(id : Nat) : async Student {
-    switch (students.get(id)) {
-      case (null) { Runtime.trap("Student not found") };
-      case (?student) { student };
-    };
+  public query ({ caller }) func getTotalCount() : async Nat {
+    students.size();
   };
 };

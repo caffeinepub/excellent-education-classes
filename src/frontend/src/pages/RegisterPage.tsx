@@ -1,5 +1,3 @@
-import { useState } from "react";
-import { CheckCircle, Loader2, User, Mail, Phone, School, GraduationCap } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -10,12 +8,31 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import {
+  CheckCircle,
+  GraduationCap,
+  Loader2,
+  Mail,
+  Phone,
+  School,
+  User,
+} from "lucide-react";
+import { useState } from "react";
 import { useActor } from "../hooks/useActor";
 
 const CLASS_OPTIONS = [
-  "Class 1", "Class 2", "Class 3", "Class 4",
-  "Class 5", "Class 6", "Class 7", "Class 8",
-  "Class 9", "Class 10", "Class 11", "Class 12",
+  "Class 1",
+  "Class 2",
+  "Class 3",
+  "Class 4",
+  "Class 5",
+  "Class 6",
+  "Class 7",
+  "Class 8",
+  "Class 9",
+  "Class 10",
+  "Class 11",
+  "Class 12",
   "Graduation",
 ];
 
@@ -46,6 +63,9 @@ export default function RegisterPage() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitted, setSubmitted] = useState(false);
   const [submitError, setSubmitError] = useState<string | null>(null);
+
+  // True only while the actor is initializing AND we don't have it yet
+  const isActorLoading = isFetching && !actor;
 
   const validate = (): boolean => {
     const newErrors: Partial<FormState> = {};
@@ -86,18 +106,35 @@ export default function RegisterPage() {
     setSubmitError(null);
 
     try {
-      await actor.registerStudent(
+      // Wait briefly for actor if it's still initializing
+      let resolvedActor = actor;
+      if (!resolvedActor) {
+        setSubmitError(
+          "Still connecting to the server. Please wait a moment and try again.",
+        );
+        setIsSubmitting(false);
+        return;
+      }
+
+      await resolvedActor.registerStudent(
         form.name.trim(),
         form.email.trim(),
         form.mobile.trim(),
         form.gender,
         form.school.trim(),
-        form.classLevel
+        form.classLevel,
       );
       setSubmitted(true);
       setForm(INITIAL_FORM);
     } catch (err) {
-      setSubmitError("Registration failed. Please try again.");
+      const errorMessage = err instanceof Error ? err.message : String(err);
+      if (errorMessage.includes("network") || errorMessage.includes("fetch")) {
+        setSubmitError(
+          "Network error. Please check your connection and try again.",
+        );
+      } else {
+        setSubmitError("Registration failed. Please try again.");
+      }
       console.error(err);
     } finally {
       setIsSubmitting(false);
@@ -166,11 +203,11 @@ export default function RegisterPage() {
             </span>
           </div>
           <h1 className="font-display font-extrabold text-4xl sm:text-5xl text-foreground mb-3">
-            Join Our{" "}
-            <span className="holi-text-pink">Family</span>
+            Join Our <span className="holi-text-pink">Family</span>
           </h1>
           <p className="text-muted-foreground font-body max-w-sm mx-auto">
-            Fill in your details below to register with Excellent Education Classes
+            Fill in your details below to register with Excellent Education
+            Classes
           </p>
         </div>
 
@@ -186,10 +223,17 @@ export default function RegisterPage() {
             style={{ background: "oklch(0.58 0.24 340)", opacity: 0.1 }}
           />
 
-          <form onSubmit={handleSubmit} noValidate className="relative z-10 space-y-5">
+          <form
+            onSubmit={handleSubmit}
+            noValidate
+            className="relative z-10 space-y-5"
+          >
             {/* Full Name */}
             <div className="space-y-1.5">
-              <Label htmlFor="name" className="font-semibold text-foreground flex items-center gap-1.5">
+              <Label
+                htmlFor="name"
+                className="font-semibold text-foreground flex items-center gap-1.5"
+              >
                 <User className="w-4 h-4 holi-text-pink" />
                 Full Name <span className="text-destructive">*</span>
               </Label>
@@ -204,13 +248,18 @@ export default function RegisterPage() {
                 }`}
               />
               {errors.name && (
-                <p className="text-destructive text-xs font-body">{errors.name}</p>
+                <p className="text-destructive text-xs font-body">
+                  {errors.name}
+                </p>
               )}
             </div>
 
             {/* Email */}
             <div className="space-y-1.5">
-              <Label htmlFor="email" className="font-semibold text-foreground flex items-center gap-1.5">
+              <Label
+                htmlFor="email"
+                className="font-semibold text-foreground flex items-center gap-1.5"
+              >
                 <Mail className="w-4 h-4 holi-text-orange" />
                 Email Address <span className="text-destructive">*</span>
               </Label>
@@ -221,17 +270,24 @@ export default function RegisterPage() {
                 value={form.email}
                 onChange={(e) => handleChange("email", e.target.value)}
                 className={`rounded-xl border-2 focus-visible:ring-holi-orange/30 ${
-                  errors.email ? "border-destructive" : "focus:border-holi-orange"
+                  errors.email
+                    ? "border-destructive"
+                    : "focus:border-holi-orange"
                 }`}
               />
               {errors.email && (
-                <p className="text-destructive text-xs font-body">{errors.email}</p>
+                <p className="text-destructive text-xs font-body">
+                  {errors.email}
+                </p>
               )}
             </div>
 
             {/* Mobile */}
             <div className="space-y-1.5">
-              <Label htmlFor="mobile" className="font-semibold text-foreground flex items-center gap-1.5">
+              <Label
+                htmlFor="mobile"
+                className="font-semibold text-foreground flex items-center gap-1.5"
+              >
                 <Phone className="w-4 h-4 holi-text-green" />
                 Mobile Number <span className="text-destructive">*</span>
               </Label>
@@ -242,17 +298,24 @@ export default function RegisterPage() {
                 value={form.mobile}
                 onChange={(e) => handleChange("mobile", e.target.value)}
                 className={`rounded-xl border-2 focus-visible:ring-holi-green/30 ${
-                  errors.mobile ? "border-destructive" : "focus:border-holi-green"
+                  errors.mobile
+                    ? "border-destructive"
+                    : "focus:border-holi-green"
                 }`}
               />
               {errors.mobile && (
-                <p className="text-destructive text-xs font-body">{errors.mobile}</p>
+                <p className="text-destructive text-xs font-body">
+                  {errors.mobile}
+                </p>
               )}
             </div>
 
             {/* Gender */}
             <div className="space-y-1.5">
-              <Label htmlFor="gender" className="font-semibold text-foreground flex items-center gap-1.5">
+              <Label
+                htmlFor="gender"
+                className="font-semibold text-foreground flex items-center gap-1.5"
+              >
                 <span className="text-base">👤</span>
                 Gender <span className="text-destructive">*</span>
               </Label>
@@ -277,13 +340,18 @@ export default function RegisterPage() {
                 </SelectContent>
               </Select>
               {errors.gender && (
-                <p className="text-destructive text-xs font-body">{errors.gender}</p>
+                <p className="text-destructive text-xs font-body">
+                  {errors.gender}
+                </p>
               )}
             </div>
 
             {/* School */}
             <div className="space-y-1.5">
-              <Label htmlFor="school" className="font-semibold text-foreground flex items-center gap-1.5">
+              <Label
+                htmlFor="school"
+                className="font-semibold text-foreground flex items-center gap-1.5"
+              >
                 <School className="w-4 h-4 holi-text-blue" />
                 School Name <span className="text-destructive">*</span>
               </Label>
@@ -294,17 +362,24 @@ export default function RegisterPage() {
                 value={form.school}
                 onChange={(e) => handleChange("school", e.target.value)}
                 className={`rounded-xl border-2 focus-visible:ring-holi-blue/30 ${
-                  errors.school ? "border-destructive" : "focus:border-holi-blue"
+                  errors.school
+                    ? "border-destructive"
+                    : "focus:border-holi-blue"
                 }`}
               />
               {errors.school && (
-                <p className="text-destructive text-xs font-body">{errors.school}</p>
+                <p className="text-destructive text-xs font-body">
+                  {errors.school}
+                </p>
               )}
             </div>
 
             {/* Class */}
             <div className="space-y-1.5">
-              <Label htmlFor="classLevel" className="font-semibold text-foreground flex items-center gap-1.5">
+              <Label
+                htmlFor="classLevel"
+                className="font-semibold text-foreground flex items-center gap-1.5"
+              >
                 <GraduationCap className="w-4 h-4 holi-text-purple" />
                 Class / Grade <span className="text-destructive">*</span>
               </Label>
@@ -329,7 +404,9 @@ export default function RegisterPage() {
                 </SelectContent>
               </Select>
               {errors.classLevel && (
-                <p className="text-destructive text-xs font-body">{errors.classLevel}</p>
+                <p className="text-destructive text-xs font-body">
+                  {errors.classLevel}
+                </p>
               )}
             </div>
 
@@ -343,7 +420,7 @@ export default function RegisterPage() {
             {/* Submit Button */}
             <Button
               type="submit"
-              disabled={isSubmitting || isFetching}
+              disabled={isSubmitting || isActorLoading}
               className="w-full holi-gradient-hero text-white font-display font-bold text-base py-6 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 mt-2"
             >
               {isSubmitting ? (
@@ -351,7 +428,7 @@ export default function RegisterPage() {
                   <Loader2 className="mr-2 w-4 h-4 animate-spin" />
                   Registering...
                 </>
-              ) : isFetching ? (
+              ) : isActorLoading ? (
                 <>
                   <Loader2 className="mr-2 w-4 h-4 animate-spin" />
                   Connecting...
@@ -362,7 +439,8 @@ export default function RegisterPage() {
             </Button>
 
             <p className="text-center text-xs text-muted-foreground font-body">
-              By registering, you agree to be contacted by Excellent Education Classes
+              By registering, you agree to be contacted by Excellent Education
+              Classes
             </p>
           </form>
         </div>

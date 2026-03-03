@@ -23,6 +23,7 @@ export const Student = IDL.Record({
 export const idlService = IDL.Service({
   'getAllStudents' : IDL.Func([], [IDL.Vec(Student)], ['query']),
   'getStudentById' : IDL.Func([IDL.Nat], [Student], ['query']),
+  'getTotalCount' : IDL.Func([], [IDL.Nat], ['query']),
   'registerStudent' : IDL.Func(
       [IDL.Text, IDL.Text, IDL.Text, IDL.Text, IDL.Text, IDL.Text],
       [IDL.Nat],
@@ -48,6 +49,7 @@ export const idlFactory = ({ IDL }) => {
   return IDL.Service({
     'getAllStudents' : IDL.Func([], [IDL.Vec(Student)], ['query']),
     'getStudentById' : IDL.Func([IDL.Nat], [Student], ['query']),
+    'getTotalCount' : IDL.Func([], [IDL.Nat], ['query']),
     'registerStudent' : IDL.Func(
         [IDL.Text, IDL.Text, IDL.Text, IDL.Text, IDL.Text, IDL.Text],
         [IDL.Nat],

@@ -1,5 +1,5 @@
-import { ArrowRight, Users, BookOpen, Trophy, Sparkles } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { ArrowRight, BookOpen, Sparkles, Trophy, Users } from "lucide-react";
 
 type Page = "/" | "/register" | "/courses" | "/about";
 
@@ -185,22 +185,28 @@ export default function HomePage({ navigate }: HomePageProps) {
           </div>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-            {highlights.map(({ icon: Icon, title, desc, gradient, textColor, iconBg }) => (
-              <div
-                key={title}
-                className={`${gradient} rounded-2xl p-6 card-hover border border-border`}
-              >
-                <div className={`w-12 h-12 rounded-xl ${iconBg} flex items-center justify-center mb-4`}>
-                  <Icon className={`w-6 h-6 ${textColor}`} />
+            {highlights.map(
+              ({ icon: Icon, title, desc, gradient, textColor, iconBg }) => (
+                <div
+                  key={title}
+                  className={`${gradient} rounded-2xl p-6 card-hover border border-border`}
+                >
+                  <div
+                    className={`w-12 h-12 rounded-xl ${iconBg} flex items-center justify-center mb-4`}
+                  >
+                    <Icon className={`w-6 h-6 ${textColor}`} />
+                  </div>
+                  <h3
+                    className={`font-display font-bold text-lg mb-2 ${textColor}`}
+                  >
+                    {title}
+                  </h3>
+                  <p className="text-muted-foreground text-sm font-body leading-relaxed">
+                    {desc}
+                  </p>
                 </div>
-                <h3 className={`font-display font-bold text-lg mb-2 ${textColor}`}>
-                  {title}
-                </h3>
-                <p className="text-muted-foreground text-sm font-body leading-relaxed">
-                  {desc}
-                </p>
-              </div>
-            ))}
+              ),
+            )}
           </div>
         </div>
       </section>
@@ -220,7 +226,8 @@ export default function HomePage({ navigate }: HomePageProps) {
             Ready to Start Your Journey?
           </h2>
           <p className="text-white/90 font-body text-lg mb-8">
-            Join hundreds of happy students and begin your path to excellence today.
+            Join hundreds of happy students and begin your path to excellence
+            today.
           </p>
           <Button
             onClick={() => navigate("/register")}

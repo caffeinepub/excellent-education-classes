@@ -21,5 +21,6 @@ export type Time = bigint;
 export interface backendInterface {
     getAllStudents(): Promise<Array<Student>>;
     getStudentById(id: bigint): Promise<Student>;
+    getTotalCount(): Promise<bigint>;
     registerStudent(name: string, email: string, mobile: string, gender: string, school: string, classLevel: string): Promise<bigint>;
 }

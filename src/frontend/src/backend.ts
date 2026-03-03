@@ -103,6 +103,7 @@ export type Time = bigint;
 export interface backendInterface {
     getAllStudents(): Promise<Array<Student>>;
     getStudentById(id: bigint): Promise<Student>;
+    getTotalCount(): Promise<bigint>;
     registerStudent(name: string, email: string, mobile: string, gender: string, school: string, classLevel: string): Promise<bigint>;
 }
 export class Backend implements backendInterface {
@@ -132,6 +133,20 @@ export class Backend implements backendInterface {
             }
         } else {
             const result = await this.actor.getStudentById(arg0);
+            return result;
+        }
+    }
+    async getTotalCount(): Promise<bigint> {
+        if (this.processError) {
+            try {
+                const result = await this.actor.getTotalCount();
+                return result;
+            } catch (e) {
+                this.processError(e);
+                throw new Error("unreachable");
+            }
+        } else {
+            const result = await this.actor.getTotalCount();
             return result;
         }
     }

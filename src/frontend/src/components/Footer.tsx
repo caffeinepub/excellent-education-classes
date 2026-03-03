@@ -1,4 +1,29 @@
-import { Heart, GraduationCap } from "lucide-react";
+import { GraduationCap, Heart } from "lucide-react";
+import { SiInstagram, SiWhatsapp, SiYoutube } from "react-icons/si";
+
+const SOCIAL_LINKS = [
+  {
+    icon: SiInstagram,
+    label: "Instagram",
+    href: "https://www.instagram.com/excellenteducationclasses2025?igsh=ZXAza2t1czNsZXJl",
+    hoverClass: "hover:text-pink-300",
+    bgClass: "hover:bg-pink-500/20",
+  },
+  {
+    icon: SiYoutube,
+    label: "YouTube",
+    href: "https://youtube.com/@excellenteducationclasses?si=geNJcK1Hq_-LitPI",
+    hoverClass: "hover:text-red-400",
+    bgClass: "hover:bg-red-500/20",
+  },
+  {
+    icon: SiWhatsapp,
+    label: "WhatsApp",
+    href: "https://whatsapp.com/channel/0029VbCX02kEwEjpQ5kAve1I",
+    hoverClass: "hover:text-green-300",
+    bgClass: "hover:bg-green-500/20",
+  },
+];
 
 export default function Footer() {
   return (
@@ -22,19 +47,39 @@ export default function Footer() {
 
           {/* Contact quick info */}
           <div className="text-center text-white/80 text-sm">
-            <p>📍 123 Education Lane, Knowledge City</p>
-            <p>📞 +91 98765 43210</p>
+            <p>
+              📍 Near Lakshya Public School, Mauranipur, Jhansi, Uttar Pradesh
+            </p>
+            <p>📞 +91 97955 10320</p>
+
+            {/* Social Media Links */}
+            <div className="flex items-center justify-center gap-3 mt-3">
+              {SOCIAL_LINKS.map(
+                ({ icon: Icon, label, href, hoverClass, bgClass }) => (
+                  <a
+                    key={label}
+                    href={href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label={label}
+                    className={`flex items-center gap-1.5 text-white/80 ${hoverClass} transition-all duration-200 px-3 py-1.5 rounded-full ${bgClass} hover:scale-105`}
+                  >
+                    <Icon className="w-4 h-4" />
+                    <span className="text-xs font-semibold">{label}</span>
+                  </a>
+                ),
+              )}
+            </div>
           </div>
 
           {/* Caffeine credit */}
           <div className="text-white/70 text-xs text-center">
-            <p>© 2026 Excellent Education Classes</p>
+            <p>© {new Date().getFullYear()} Excellent Education Classes</p>
             <p className="flex items-center justify-center gap-1 mt-1">
-              Built with{" "}
-              <Heart className="w-3 h-3 text-white fill-white" />{" "}
+              Built with <Heart className="w-3 h-3 text-white fill-white" />{" "}
               using{" "}
               <a
-                href="https://caffeine.ai"
+                href={`https://caffeine.ai?utm_source=caffeine-footer&utm_medium=referral&utm_content=${encodeURIComponent(window.location.hostname)}`}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="underline hover:text-white transition-colors"

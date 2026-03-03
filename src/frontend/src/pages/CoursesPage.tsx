@@ -1,4 +1,5 @@
-import { Phone, Mail, MapPin, MessageCircle } from "lucide-react";
+import { Mail, MapPin, MessageCircle, Phone } from "lucide-react";
+import { SiInstagram, SiYoutube } from "react-icons/si";
 
 const SUBJECTS = [
   {
@@ -69,7 +70,19 @@ const CLASS_BADGE_COLORS = [
 ];
 
 const CLASS_BADGES = [
-  "1","2","3","4","5","6","7","8","9","10","11","12","Grad",
+  "1",
+  "2",
+  "3",
+  "4",
+  "5",
+  "6",
+  "7",
+  "8",
+  "9",
+  "10",
+  "11",
+  "12",
+  "Grad",
 ].map((cls, idx) => ({
   cls,
   label: cls === "Grad" ? "🎓 Graduation" : `Class ${cls}`,
@@ -80,7 +93,7 @@ const CONTACT_INFO = [
   {
     icon: MapPin,
     label: "Address",
-    value: "123 Education Lane, Knowledge City",
+    value: "Near Lakshya Public School, Mauranipur, Jhansi, Uttar Pradesh",
     color: "holi-text-pink",
     bg: "bg-holi-pink/10",
   },
@@ -122,7 +135,9 @@ export default function CoursesPage() {
         />
         <div className="relative z-10 max-w-3xl mx-auto px-4">
           <div className="inline-flex items-center gap-2 bg-white/20 backdrop-blur-sm rounded-full px-4 py-2 mb-4">
-            <span className="text-white text-sm font-semibold">📚 Our Curriculum</span>
+            <span className="text-white text-sm font-semibold">
+              📚 Our Curriculum
+            </span>
           </div>
           <h1 className="font-display font-extrabold text-white text-4xl sm:text-5xl mb-3">
             Courses We Offer
@@ -138,8 +153,7 @@ export default function CoursesPage() {
         <div className="max-w-6xl mx-auto px-4 sm:px-6">
           <div className="text-center mb-10">
             <h2 className="font-display font-extrabold text-3xl sm:text-4xl text-foreground mb-2">
-              Our{" "}
-              <span className="holi-text-pink">Subjects</span>
+              Our <span className="holi-text-pink">Subjects</span>
             </h2>
             <p className="text-muted-foreground font-body">
               Expert-taught courses covering all major disciplines
@@ -153,7 +167,9 @@ export default function CoursesPage() {
                 className={`${gradient} rounded-2xl p-5 card-hover border border-border`}
               >
                 <div className="text-4xl mb-3">{emoji}</div>
-                <h3 className={`font-display font-bold text-lg mb-1.5 ${textColor}`}>
+                <h3
+                  className={`font-display font-bold text-lg mb-1.5 ${textColor}`}
+                >
                   {name}
                 </h3>
                 <p className="text-muted-foreground text-sm font-body leading-relaxed">
@@ -190,11 +206,12 @@ export default function CoursesPage() {
           <div className="text-center mb-10">
             <div className="inline-flex items-center gap-2 bg-holi-orange/10 rounded-full px-4 py-2 mb-4">
               <span>📞</span>
-              <span className="text-holi-orange font-semibold text-sm">Get In Touch</span>
+              <span className="text-holi-orange font-semibold text-sm">
+                Get In Touch
+              </span>
             </div>
             <h2 className="font-display font-extrabold text-3xl sm:text-4xl text-foreground mb-2">
-              Contact{" "}
-              <span className="holi-text-orange">Us</span>
+              Contact <span className="holi-text-orange">Us</span>
             </h2>
             <p className="text-muted-foreground font-body">
               Have questions? We're happy to help!
@@ -207,7 +224,9 @@ export default function CoursesPage() {
                 key={label}
                 className="bg-white rounded-2xl p-5 border border-border card-hover flex items-start gap-4"
               >
-                <div className={`w-11 h-11 rounded-xl ${bg} flex items-center justify-center shrink-0`}>
+                <div
+                  className={`w-11 h-11 rounded-xl ${bg} flex items-center justify-center shrink-0`}
+                >
                   <Icon className={`w-5 h-5 ${color}`} />
                 </div>
                 <div>
@@ -229,10 +248,43 @@ export default function CoursesPage() {
               Visit Our Centre
             </h3>
             <p className="text-muted-foreground font-body">
-              123 Education Lane, Knowledge City
+              Near Lakshya Public School, Mauranipur, Jhansi, Uttar Pradesh
               <br />
               <span className="text-sm">Open Mon–Sat, 8 AM – 7 PM</span>
             </p>
+          </div>
+
+          {/* Social Media Section */}
+          <div className="mt-8 rounded-2xl border border-border bg-gradient-to-br from-pink-50 via-red-50 to-orange-50 p-8 text-center">
+            <h3 className="font-display font-bold text-xl text-foreground mb-2">
+              Follow Us Online 🌟
+            </h3>
+            <p className="text-muted-foreground font-body text-sm mb-6">
+              Stay connected with us on social media for updates, tips, and more
+            </p>
+            <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
+              {/* Instagram */}
+              <a
+                href="https://www.instagram.com/excellenteducationclasses2025?igsh=ZXAza2t1czNsZXJl"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center gap-3 px-6 py-3 rounded-2xl bg-gradient-to-r from-purple-500 via-pink-500 to-orange-400 text-white font-semibold shadow-md hover:shadow-lg hover:scale-105 transition-all duration-200 w-full sm:w-auto justify-center"
+              >
+                <SiInstagram className="w-5 h-5" />
+                <span>@excellenteducationclasses2025</span>
+              </a>
+
+              {/* YouTube */}
+              <a
+                href="https://youtube.com/@excellenteducationclasses?si=geNJcK1Hq_-LitPI"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center gap-3 px-6 py-3 rounded-2xl bg-red-600 text-white font-semibold shadow-md hover:shadow-lg hover:scale-105 hover:bg-red-700 transition-all duration-200 w-full sm:w-auto justify-center"
+              >
+                <SiYoutube className="w-5 h-5" />
+                <span>@excellenteducationclasses</span>
+              </a>
+            </div>
           </div>
         </div>
       </section>

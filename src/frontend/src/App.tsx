@@ -1,16 +1,17 @@
-import { useState } from "react";
 import { Toaster } from "@/components/ui/sonner";
-import Navbar from "./components/Navbar";
+import { useState } from "react";
 import Footer from "./components/Footer";
+import Navbar from "./components/Navbar";
+import AboutPage from "./pages/AboutPage";
+import AdminPage from "./pages/AdminPage";
+import CoursesPage from "./pages/CoursesPage";
 import HomePage from "./pages/HomePage";
 import RegisterPage from "./pages/RegisterPage";
-import CoursesPage from "./pages/CoursesPage";
-import AboutPage from "./pages/AboutPage";
 
-type Page = "/" | "/register" | "/courses" | "/about";
+export type Page = "/" | "/register" | "/courses" | "/about" | "/admin";
 
 export default function App() {
-  const [currentPage, setCurrentPage] = useState<Page>("/register");
+  const [currentPage, setCurrentPage] = useState<Page>("/");
 
   const navigate = (page: Page) => {
     setCurrentPage(page);
@@ -27,8 +28,10 @@ export default function App() {
         return <CoursesPage />;
       case "/about":
         return <AboutPage />;
+      case "/admin":
+        return <AdminPage />;
       default:
-        return <RegisterPage />;
+        return <HomePage navigate={navigate} />;
     }
   };
 

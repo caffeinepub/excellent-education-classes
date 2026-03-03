@@ -24,6 +24,7 @@ export type Time = bigint;
 export interface _SERVICE {
   'getAllStudents' : ActorMethod<[], Array<Student>>,
   'getStudentById' : ActorMethod<[bigint], Student>,
+  'getTotalCount' : ActorMethod<[], bigint>,
   'registerStudent' : ActorMethod<
     [string, string, string, string, string, string],
     bigint
